@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Address;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Notifications\EmailNotification;
 
 class UserService {
     public function registerUser(Request $request) {
@@ -26,6 +27,8 @@ class UserService {
             'email'=> $fields['email'], 
             'password' => bcrypt($fields['password'])
         ]);
+
+        // $user->notify(new EmailNotification()); 
 
         $address = Address::create([
             'street'=> $fields['street'],
